@@ -16,6 +16,8 @@ export class CombineLatestComponent {
   // and when data updated the new data will be emitted
   // combine latest not work if one observable is not completed
 
+  // It work when all observables have completed
+
   ngOnInit() {
     const obs1$ = interval(1000).pipe(take(3));
     const obs2$ = interval(1000).pipe(take(5));
