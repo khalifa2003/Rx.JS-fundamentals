@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import {
   asapScheduler,
+  BehaviorSubject,
   bindCallback,
   combineLatest,
   concat,
@@ -31,32 +32,6 @@ import {
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
   title = 'Rx.js-fundamentals';
-
-  // <-- combine-latest -->
-  // It receives data from multiple observables inside it,
-  // and if it receives data before the time expires,
-  // then it works and rejects anything else.
-  // and when data updated the new data will be emitted
-  // combine latest not work if one observable is not completed
-
-  // It work when all observables have completed
-
-  ngOnInit() {
-    // const obs1$ = interval(1000).pipe(take(3));
-    const obs1$ = new Observable((observer) => {
-      observer.complete();
-    });
-    obs1$.subscribe((x) => console.log('obs 2 ', x));
-    const obs2$ = interval(1000).pipe(take(5));
-    const combinedObs$ = combineLatest(obs1$, obs2$);
-    combinedObs$.subscribe(
-      console.log,
-      () => {},
-      () => {
-        console.log('Completed');
-      }
-    );
-  }
 }
